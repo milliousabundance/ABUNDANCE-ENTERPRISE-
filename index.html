@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Abundance Enterprise | Product Catalogue</title>
+
+    <!-- INLINE CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f8f4;
+            color: #26352b;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #145c38;
+            color: white;
+            text-align: center;
+            padding: 22px 15px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #b8f3bd;
+        }
+
+        .hero {
+            padding: 55px 20px;
+            text-align: center;
+            background: linear-gradient(
+                135deg,
+                #d9f3dc,
+                #f7fff6
+            );
+        }
+
+        .hero h2 {
+            color: #145c38;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            margin-bottom: 22px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #176b45;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 7px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .button:hover {
+            background: #104d30;
+        }
+
+        .section {
+            padding: 45px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #145c38;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .product {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #00000012;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #edf7eb;
+            margin-bottom: 12px;
+        }
+
+        .product h3 {
+            color: #145c38;
+            margin-bottom: 8px;
+        }
+
+        .product p {
+            margin-bottom: 12px;
+            font-size: 14px;
+            flex-grow: 1;
+        }
+
+        .price {
+            color: #176b45;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .product .button {
+            text-align: center;
+        }
+
+        /* ORDER FORM */
+
+        .order-section {
+            background: white;
+        }
+
+        .order-form {
+            max-width: 800px;
+            margin: auto;
+            padding: 25px;
+            background: #f8fbf7;
+            border-radius: 12px;
+        }
+
+        .order-form h3 {
+            color: #145c38;
+            margin: 25px 0 12px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cad8cb;
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: 2px solid #79bd8b;
+        }
+
+        /* QUANTITY CONTROLS */
+
+        .quantity-row {
+            display: grid;
+            grid-template-columns: 1fr 100px;
+            align-items: center;
+            gap: 12px;
+            padding: 13px;
+            margin: 10px 0;
+            background: white;
+            border: 1px solid #dce8dc;
+            border-radius: 8px;
+        }
+
+        .quantity-row label {
+            font-weight: bold;
+        }
+
+        .quantity-row small {
+            display: block;
+            color: #66746c;
+            font-weight: normal;
+        }
+
+        .quantity-row input {
+            text-align: center;
+        }
+
+        /* ORDER SUMMARY */
+
+        .summary-box {
+            background: white;
+            padding: 15px;
+            border: 1px solid #dce8dc;
+            border-radius: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e9e2;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .grand-total {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 18px;
+            background: #e3f5e4;
+            border-radius: 8px;
+            color: #145c38;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .submit-button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 15px;
+            font-size: 17px;
+        }
+
+        .notice {
+            color: #5d675f;
+            font-size: 13px;
+            margin-top: 18px;
+        }
+
+        #message {
+            margin-top: 15px;
+            color: #145c38;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            background: #123e2a;
+            color: white;
+            padding: 30px 15px;
+        }
+
+        footer a {
+            color: #b8f3bd;
+        }
+
+        footer p {
+            margin-top: 5px;
+        }
+
+        @media (max-width: 900px) {
+            .product-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 550px) {
+            header h1 {
+                font-size: 23px;
+            }
+
+            nav {
+                gap: 12px;
+                font-size: 14px;
+            }
+
+            .hero h2 {
+                font-size: 26px;
+            }
+
+            .product-container {
+                grid-template-columns: 1fr;
+            }
+
+            .order-form {
+                padding: 15px;
+            }
+
+            .quantity-row {
+                grid-template-columns: 1fr 85px;
+            }
+
+            .grand-total {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <h1>🌱 Abundance Enterprise</h1>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#catalogue">Catalogue</a>
+            <a href="#order">Place Order</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HOME SECTION -->
+
+    <section class="hero" id="home">
+        <h2>Welcome to Abundance Enterprise</h2>
+
+        <p>
+            Explore our agricultural supply catalogue
+            and prepare your order enquiry with ease.
+        </p>
+
+        <a href="#catalogue" class="button">
+            Explore Products
+        </a>
+    </section>
+
+    <!-- PRODUCT CATALOGUE -->
+
+    <section class="section" id="catalogue">
+
+        <h2 class="section-title">Our Product Catalogue</h2>
+
+        <p style="text-align:center; margin-bottom:25px;">
+            Select the quantities you want in the order form below.
+        </p>
+
+        <div class="product-container">
+
+            <div class="product">
+
+                <img
+                    src="https://placehold.co/300x200/e5f5e8/176b45?text=Insecticide"
+                    alt="Insecticide product illustration"
+                >
+
+                <h3>Insecticide</h3>
+
+                <p>
+                    Products intended for appropriate
+                    insect-control applications.
+                </p>
+
+                <div class="price">₦3,500</div>
+
+                <a href="#order" class="button">
+                    Order Enquiry
+                </a>
+
+            </div>
+
+            <div class="product">
+
+                <img
+                    src="https://placehold.co/300x200/e5f5e8/176b45?text=Herbicide"
+                    alt="Herbicide product illustration"
+                >
+
+                <h3>Herbicide</h3>
+
+                <p>
+                    Products for weed management
+                    through approved use.
+                </p>
+
+                <div class="price">₦5,000</div>
+
+                <a href="#order" class="button">
+                    Order Enquiry
+                </a>
+
+            </div>
+
+            <div class="product">
+
+                <img
+                    src="https://placehold.co/300x200/e5f5e8/176b45?text=Pesticide"
+                    alt="Pesticide product illustration"
+                >
+
+                <h3>Pesticide</h3>
+
+                <p>
+                    Explore suitable pest-management
+                    product options.
+                </p>
+
+                <div class="price">₦4,500</div>
+
+                <a href="#order" class="button">
+                    Order Enquiry
+                </a>
+
+            </div>
+
+            <div class="product">
+
+                <img
+                    src="https://placehold.co/300x200/e5f5e8/176b45?text=Snake+expeller"
+                    alt="Snake expeller product illustration"
+                >
+
+                <h3>Snake expeller</h3>
+
+                <p>
+                    Ask about suitable, legally approved
+                    snake-control options.
+                </p>
+
+                <div class="price">₦6,000</div>
+
+                <a href="#order" class="button">
+                    Order Enquiry
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CUSTOMER ORDER FORM -->
+
+    <section class="section order-section" id="order">
+
+        <h2 class="section-title">Place Your Order</h2>
+
+        <form id="orderForm" class="order-form">
+
+            <h3>Customer Information</h3>
+
+            <div class="form-group">
+                <label for="customerName">Full Name</label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    name="customerName"
+                    autocomplete="name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    autocomplete="tel"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="state">State</label>
+
+                <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="lga">
+                    Local Government Area
+                </label>
+
+                <input
+                    type="text"
+                    id="lga"
+                    name="lga"
+                    required
+                >
+            </div>
+
+            <!-- PRODUCT QUANTITIES -->
+
+            <h3>Select Products and Quantities</h3>
+
+            <div id="quantityContainer"></div>
+
+            <!-- ORDER LIST -->
+
+            <h3>Full Order List</h3>
+
+            <div class="summary-box" id="orderSummary">
+                <p>No products selected yet.</p>
+            </div>
+
+            <div class="grand-total">
+                <span>Total:</span>
+
+                <span id="totalPrice">₦0</span>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">
+                    Additional Information
+                </label>
+
+                <textarea
+                    id="notes"
+                    name="notes"
+                    rows="4"
+                    placeholder="Optional message or delivery questions"
+                ></textarea>
+            </div>
+
+            <button
+                type="submit"
+                class="button submit-button"
+            >
+                Submit Order Enquiry
+            </button>
+
+            <p id="message" role="status"></p>
+
+            <p class="notice">
+                Prices shown are demonstration prices and must
+                be confirmed. This form prepares an email enquiry;
+                it does not process payments. Regulated pest-control
+                products should be supplied and handled through
+                appropriate licensed channels.
+            </p>
+
+        </form>
+    </section>
+
+    <!-- CONTACT -->
+
+    <footer id="contact">
+
+        <h2>Abundance Enterprise</h2>
+
+        <p>Agricultural Supplies and Product Enquiries</p>
+
+        <p>
+            Email:
+            <a href="mailto:milliousabundance@gmail.com">
+                milliousabundance@gmail.com
+            </a>
+        </p>
+
+        <p>© 2026 Abundance Enterprise</p>
+
+    </footer>
+
+    <!-- INLINE JAVASCRIPT -->
+
+    <script>
+        // ABUNDANCE ENTERPRISE PRODUCT DATA
+
+        const products = [
+            {
+                name: "Insecticide",
+                price: 3500
+            },
+            {
+                name: "Herbicide",
+                price: 5000
+            },
+            {
+                name: "Pesticide",
+                price: 4500
+            },
+            {
+                name: "Snake Repellent",
+                price: 6000
+            }
+        ];
+
+        const businessEmail =
+            "milliousabundance@gmail.com";
+
+        // Format prices as Nigerian Naira.
+
+        function formatPrice(amount) {
+            return "₦" + amount.toLocaleString("en-NG");
+        }
+
+        // Create the quantity fields.
+
+        function displayProducts() {
+            const container =
+                document.getElementById("quantityContainer");
+
+            container.innerHTML = "";
+
+            products.forEach((product, index) => {
+                const row = document.createElement("div");
+
+                row.className = "quantity-row";
+
+                const label = document.createElement("label");
+
+                label.htmlFor = "quantity-" + index;
+
+                label.innerHTML =
+                    product.name +
+                    "<small>Unit price: " +
+                    formatPrice(product.price) +
+                    "</small>";
+
+                const input = document.createElement("input");
+
+                input.type = "number";
+                input.id = "quantity-" + index;
+                input.min = "0";
+                input.max = "999";
+                input.step = "1";
+                input.value = "0";
+                input.setAttribute(
+                    "aria-label",
+                    "Quantity of " + product.name
+                );
+
+                input.addEventListener(
+                    "input",
+                    calculateTotal
+                );
+
+                row.appendChild(label);
+                row.appendChild(input);
+
+                container.appendChild(row);
+            });
+        }
+
+        // Calculate the full order and update the summary.
+
+        function calculateTotal() {
+            const summary =
+                document.getElementById("orderSummary");
+
+            const totalElement =
+                document.getElementById("totalPrice");
+
+            summary.innerHTML = "";
+
+            let total = 0;
+            let hasProducts = false;
+
+            products.forEach((product, index) => {
+                const input = document.getElementById(
+                    "quantity-" + index
+                );
+
+                const quantity = Math.max(
+                    0,
+                    Math.min(
+                        999,
+                        Number.parseInt(input.value, 10) || 0
+                    )
+                );
+
+                const subtotal =
+                    product.price * quantity;
+
+                if (quantity > 0) {
+                    hasProducts = true;
+
+                    total += subtotal;
+
+                    const row =
+                        document.createElement("div");
+
+                    row.className = "summary-row";
+
+                    const itemName =
+                        document.createElement("span");
+
+                    itemName.textContent =
+                        product.name + " × " + quantity;
+
+                    const itemPrice =
+                        document.createElement("strong");
+
+                    itemPrice.textContent =
+                        formatPrice(subtotal);
+
+                    row.appendChild(itemName);
+                    row.appendChild(itemPrice);
+
+                    summary.appendChild(row);
+                }
+            });
+
+            if (!hasProducts) {
+                const emptyMessage =
+                    document.createElement("p");
+
+                emptyMessage.textContent =
+                    "No products selected yet.";
+
+                summary.appendChild(emptyMessage);
+            }
+
+            const totalRow =
+                document.createElement("div");
+
+            totalRow.className = "summary-row";
+
+            const totalLabel =
+                document.createElement("strong");
+
+            totalLabel.textContent = "TOTAL";
+
+            const totalAmount =
+                document.createElement("strong");
+
+            totalAmount.textContent =
+                formatPrice(total);
+
+            totalRow.appendChild(totalLabel);
+            totalRow.appendChild(totalAmount);
+
+            summary.appendChild(totalRow);
+
+            totalElement.textContent =
+                formatPrice(total);
+
+            return total;
+        }
+
+        // Prepare the order enquiry email.
+
+        document.getElementById("orderForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const name =
+                    document.getElementById(
+                        "customerName"
+                    ).value.trim();
+
+                const phone =
+                    document.getElementById(
+                        "phone"
+                    ).value.trim();
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    ).value.trim();
+
+                const state =
+                    document.getElementById(
+                        "state"
+                    ).value.trim();
+
+                const lga =
+                    document.getElementById(
+                        "lga"
+                    ).value.trim();
+
+                const notes =
+                    document.getElementById(
+                        "notes"
+                    ).value.trim();
+
+                const message =
+                    document.getElementById("message");
+
+                const selectedProducts = [];
+
+                let total = 0;
+
+                products.forEach((pro
